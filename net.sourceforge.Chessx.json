@@ -15,6 +15,43 @@
     ],
     "modules": [
         {
+            "name": "stockfish",
+            "buildsystem": "simple",
+            "subdir": "src",
+            "build-options": {
+                "arch": {
+                    "x86_64": {
+                        "env": {
+                            "ARCH": "x86-64"
+                        }
+                    },
+                    "aarch64": {
+                        "env": {
+                            "ARCH": "armv7"
+                        }
+                    }
+                }
+            },
+            "build-commands": [
+                "make build",
+                "install -D stockfish /app/bin/stockfish"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/official-stockfish/Stockfish.git",
+                    "commit": "3597f1942ec6f2cfbd50b905683739b0900ff5dd",
+                    "tag": "sf_13"
+                },
+                {
+                    "type": "file",
+                    "dest": "src",
+                    "url": "https://tests.stockfishchess.org/api/nn/nn-62ef826d1a6d.nnue",
+                    "sha256": "62ef826d1a6d11b9e814188025aa02a60815c037292e0ef9bbb9bf4f724e5e63"
+                }
+            ]
+        },
+        {
             "name": "chessx",
             "buildsystem": "qmake",
             "no-make-install": true,
